@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Workshop de Film-details</title>
+</head>
+<body>
+    <main class="pt-10 mx-auto md:w-11/12 lg:w-10/12 xl:w-8/12">
+        <h1 class="mb-5 text-4xl font-bold text-center ">Détails Film</h1>
+        <section >
+           <div class="relative h-56 overflow-hidden rounded-md">
+               <div class="absolute w-full h-full bg-black bg-opacity-10"></div>
+               <img class="w-full h-auto object-fill" src="https://4.bp.blogspot.com/-pqGRArpy-0c/W-GkVJ2F8hI/AAAAAAAABsc/YK-KSMcWYAY7v1B8Q4AwyPT_k1PxaZkGQCLcBGAs/s1600/Venom%2BMASK%2Bfor%2BMobile%2Bediting%2BKL1055.png" alt="">
+           </div>
+           <div class="relative -mt-24 px-10">
+               <div class="flex gap-5">
+                  <div class="w:3/5 md:w-1/4">
+
+                      <img class="h-52 w-full object-cover" src="https://www.downloadclipart.net/large/venom-png-pic.png" alt="">
+                      <div class="text-center">{{film.vote_average}} ({{film.vote_count}} votes)</div>
+                  </div>
+                   <div class="flex flex-col  justify-around">
+                        <div class="flex justify-between pr-5">
+                            <h3 class="text-white text-3xl font-semibold">{{film.title}}</h3>
+                            <span class="text-white text-lg font-semibold">2021</span>
+                        </div>
+                            <p class="text-md">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                 Dolor, hic dolores! Temporibus debitis doloremque,
+                            </p>
+                   </div>
+               </div>
+               <div class=" flex justify-between mt-10">
+                    <div>
+                        <button  class="px-3 py-2 rounded  shadow border bg-green-500 cursor-pointer border-green-600 mr-5">J'aime</button>
+                        <button class="px-3 py-2 rounded shadow border bg-gray-500 cursor-pointer border-gray-600">Je n'aime pas</button>
+                    </div>
+                    <a href="/index.html" class="px-3 py-2 rounded shadow border bg-gray-500 cursor-pointer border-gray-600">Retour</a href="/index.html">
+               </div>
+           </div>
+        </section>
+    </main>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: { 
+                films:[],
+                image_root:"http://image.tmdb.org/t/p/w500",
+                message : 'Hello Vue!'
+            },
+            mounted(){
+                //Requete api
+                this.init();
+            },
+            methods: {
+                init: async function(){
+                    console.log(">> init()");
+                    try{
+                        fetch("https://api.themoviedb.org/3/movie/popular?api_key=833c4822773bba014b004669626be8c8&language=en-US&page=1")
+                        .then(async (response)=>{
+                            var rawData = await response.text();
+                           // console.log("<<<<response :", data);
+
+                           var data =JSON.parse(rawData);
+                            this.films = data['results'];
+                            console.log("loaded films", this.films);
+                        });  
+ 
+                    }catch(e){
+                        console.log("xx error :", e);
+                    }
+                    console.log(">> end init");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

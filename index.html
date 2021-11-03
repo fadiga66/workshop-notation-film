@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Workshop de Film</title>
+</head>
+<body>
+    <main id="app" class="pt-10 mx-auto md:w-11/12 lg:w-10/12 xl:w-8/12">
+        <h1 class="mb-5 text-4xl font-bold text-center">Site de Notation de Film {{message}}</h1>
+        <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+        
+            <article v-for= "film in films" :key="film.id" class="bg-blue-400">
+                <a href="/details.html">
+                    <div class="relative">
+                        <div class="absolute w-full h-full bg-black bg-opacity-10"></div>
+                        <span class="absolute right-5 text-white top-5 text-xl font-semibold shadow">{{film.vote_average}}</span>
+                        <img class="w-full h-auto " :src="image_root+ film.poster_path" alt="">
+                    </div>
+                    <div class="font-semibold text-xl">
+                        <h3>{{film.title}}</h3> 
+                        <div class="flex justify-between items-center">
+                            <span>{{film.release_date}}</span>
+                            <span>120m</span>
+                        </div>
+                    </div>
+                </a>    
+            </article>
+            <div class="bg-red-500"></div>
+            <div class="bg-blue-500"></div>
+        </section>
+    </main>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: { 
+                films:[],
+                image_root:"http://image.tmdb.org/t/p/w500",
+                message : 'Hello Vue!'
+            },
+            mounted(){
+                //Requete api
+                this.init();
+            },
+            methods: {
+                init: async function(){
+                    console.log(">> init()");
+                    try{
+                        fetch("https://api.themoviedb.org/3/movie/popular?api_key=833c4822773bba014b004669626be8c8&language=en-US&page=1")
+                        .then(async (response)=>{
+                            var rawData = await response.text();
+                           // console.log("<<<<response :", data);
+
+                           var data =JSON.parse(rawData);
+                            this.films = data['results'];
+                            console.log("loaded films", this.films);
+                        });  
+ 
+                    }catch(e){
+                        console.log("xx error :", e);
+                    }
+                    console.log(">> end init");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

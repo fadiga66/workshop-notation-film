@@ -14,7 +14,7 @@
         <section  v-for= "film in films" :key="film.id">
            <div class="relative h-56 overflow-hidden rounded-md">
                <div class="absolute w-full h-full bg-black bg-opacity-10"></div>
-               <img class="w-full h-auto object-fill" src="https://4.bp.blogspot.com/-pqGRArpy-0c/W-GkVJ2F8hI/AAAAAAAABsc/YK-KSMcWYAY7v1B8Q4AwyPT_k1PxaZkGQCLcBGAs/s1600/Venom%2BMASK%2Bfor%2BMobile%2Bediting%2BKL1055.png" alt="">
+               <img class="w-full h-auto object-fill" :src="image_root+film.backdrop_path" alt="">
            </div>
            <div class="relative -mt-20 px-10">
                <div class="flex gap-5">
@@ -41,6 +41,7 @@
                     <a href="/index.html" class="px-3 py-2 rounded shadow border bg-gray-500 cursor-pointer border-gray-600">Retour</a href="/index.html">
                </div>
            </div>
+           <br><br>
         </section>
     </main>
     <script>

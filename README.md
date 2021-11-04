@@ -1,3 +1,3 @@
-https://api.themoviedb.org/3/movie/popular?api_key=833c4822773bba014b004669626be8c8&language=en-US&page=1
-
-http://image.tmdb.org/t/p/w500
+Salut monsieur, je vous envoie ma contribution au projet que nous avons commencé ensemble à Gomycode sur la session du workshop sur la notation de film. J'ai fais quelques adaptations sur le projet mais j'ai eu des difficultés sur la partie Détails du projet. Quand je clique sur un film, je suis sensé obtenu des informations uniquement sur le film en question mais dans mon cas j'obtiens tout le tableau au fait c'est-à-dire les détails de tous les films. Aidez-moi svp à resoudre cette partie et à apporter des modifications à mon code vue.js.
+Merci à vous monsieur, 
+Merci à Gomycode pour tout ce que vous faites pour nous.
